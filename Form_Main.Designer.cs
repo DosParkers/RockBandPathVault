@@ -1,4 +1,4 @@
-﻿namespace Rock_Band_4_Path_Vault
+﻿namespace RockBand4PathVault
 {
     partial class Form_Main
     {
@@ -31,23 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.TextBox_Input = new System.Windows.Forms.TextBox();
             this.ListBox_SongSelect = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Label_Title_Search = new System.Windows.Forms.Label();
+            this.Label_Title_Select = new System.Windows.Forms.Label();
             this.Label_Message = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.Label_Title_Vocals = new System.Windows.Forms.Label();
+            this.Label_Title_Drums = new System.Windows.Forms.Label();
+            this.Label_Title_Guitar = new System.Windows.Forms.Label();
+            this.Label_Title_Bass = new System.Windows.Forms.Label();
             this.Thread1 = new System.ComponentModel.BackgroundWorker();
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripItem_OnlinePlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Harmonies = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_About = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.ToolStripMenuItem_LastReload = new System.Windows.Forms.ToolStripMenuItem();
             this.Label_Vocals1 = new System.Windows.Forms.Label();
             this.Label_Vocals2 = new System.Windows.Forms.Label();
             this.Label_Drums1 = new System.Windows.Forms.Label();
@@ -56,7 +56,11 @@
             this.Label_Drums2 = new System.Windows.Forms.Label();
             this.Label_Guitar2 = new System.Windows.Forms.Label();
             this.Label_Bass2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.MenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBox_Input
@@ -64,9 +68,10 @@
             this.TextBox_Input.BackColor = System.Drawing.Color.Black;
             this.TextBox_Input.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox_Input.ForeColor = System.Drawing.Color.White;
-            this.TextBox_Input.Location = new System.Drawing.Point(68, 31);
+            this.TextBox_Input.Location = new System.Drawing.Point(85, 39);
+            this.TextBox_Input.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Input.Name = "TextBox_Input";
-            this.TextBox_Input.Size = new System.Drawing.Size(300, 30);
+            this.TextBox_Input.Size = new System.Drawing.Size(374, 36);
             this.TextBox_Input.TabIndex = 0;
             this.TextBox_Input.TextChanged += new System.EventHandler(this.TextBox_Input_TextChanged);
             this.TextBox_Input.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Input_KeyDown);
@@ -78,103 +83,104 @@
             this.ListBox_SongSelect.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_SongSelect.ForeColor = System.Drawing.Color.White;
             this.ListBox_SongSelect.FormattingEnabled = true;
-            this.ListBox_SongSelect.ItemHeight = 19;
-            this.ListBox_SongSelect.Location = new System.Drawing.Point(68, 67);
+            this.ListBox_SongSelect.ItemHeight = 24;
+            this.ListBox_SongSelect.Location = new System.Drawing.Point(85, 84);
+            this.ListBox_SongSelect.Margin = new System.Windows.Forms.Padding(4);
             this.ListBox_SongSelect.Name = "ListBox_SongSelect";
-            this.ListBox_SongSelect.ScrollAlwaysVisible = true;
-            this.ListBox_SongSelect.Size = new System.Drawing.Size(300, 80);
+            this.ListBox_SongSelect.Size = new System.Drawing.Size(374, 100);
             this.ListBox_SongSelect.TabIndex = 3;
             this.ListBox_SongSelect.SelectedIndexChanged += new System.EventHandler(this.ListBox_SongSelect_SelectedIndexChanged);
             // 
-            // label1
+            // Label_Title_Search
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 38);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "SONG\r\nSEARCH";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label_Title_Search.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Search.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Search.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Search.Location = new System.Drawing.Point(0, 39);
+            this.Label_Title_Search.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Search.Name = "Label_Title_Search";
+            this.Label_Title_Search.Size = new System.Drawing.Size(86, 36);
+            this.Label_Title_Search.TabIndex = 16;
+            this.Label_Title_Search.Text = "SEARCH";
+            this.Label_Title_Search.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // Label_Title_Select
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(8, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 46);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "SONG\r\nSELECT";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Label_Title_Select.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Select.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Select.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Select.Location = new System.Drawing.Point(0, 84);
+            this.Label_Title_Select.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Select.Name = "Label_Title_Select";
+            this.Label_Title_Select.Size = new System.Drawing.Size(86, 100);
+            this.Label_Title_Select.TabIndex = 17;
+            this.Label_Title_Select.Text = "SELECT";
+            this.Label_Title_Select.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Label_Message
             // 
             this.Label_Message.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label_Message.ForeColor = System.Drawing.Color.White;
-            this.Label_Message.Location = new System.Drawing.Point(211, 80);
+            this.Label_Message.Location = new System.Drawing.Point(264, 100);
+            this.Label_Message.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Message.Name = "Label_Message";
-            this.Label_Message.Size = new System.Drawing.Size(124, 58);
+            this.Label_Message.Size = new System.Drawing.Size(155, 72);
             this.Label_Message.TabIndex = 18;
             this.Label_Message.Text = "label3";
             this.Label_Message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Label_Message.Visible = false;
             // 
-            // label3
+            // Label_Title_Vocals
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(5, 181);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 23);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "VOCALS";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Title_Vocals.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Vocals.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Vocals.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Vocals.Location = new System.Drawing.Point(0, 191);
+            this.Label_Title_Vocals.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Vocals.Name = "Label_Title_Vocals";
+            this.Label_Title_Vocals.Size = new System.Drawing.Size(86, 94);
+            this.Label_Title_Vocals.TabIndex = 23;
+            this.Label_Title_Vocals.Text = "VOCALS";
+            this.Label_Title_Vocals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // Label_Title_Drums
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(8, 261);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 23);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "DRUMS";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Title_Drums.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Drums.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Drums.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Drums.Location = new System.Drawing.Point(0, 294);
+            this.Label_Title_Drums.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Drums.Name = "Label_Title_Drums";
+            this.Label_Title_Drums.Size = new System.Drawing.Size(86, 94);
+            this.Label_Title_Drums.TabIndex = 24;
+            this.Label_Title_Drums.Text = "DRUMS";
+            this.Label_Title_Drums.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label5
+            // Label_Title_Guitar
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(8, 341);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 23);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "GUITAR";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Title_Guitar.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Guitar.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Guitar.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Guitar.Location = new System.Drawing.Point(0, 396);
+            this.Label_Title_Guitar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Guitar.Name = "Label_Title_Guitar";
+            this.Label_Title_Guitar.Size = new System.Drawing.Size(86, 95);
+            this.Label_Title_Guitar.TabIndex = 25;
+            this.Label_Title_Guitar.Text = "GUITAR";
+            this.Label_Title_Guitar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label6
+            // Label_Title_Bass
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(20, 423);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 23);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "BASS";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Label_Title_Bass.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Title_Bass.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Title_Bass.ForeColor = System.Drawing.Color.White;
+            this.Label_Title_Bass.Location = new System.Drawing.Point(0, 499);
+            this.Label_Title_Bass.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label_Title_Bass.Name = "Label_Title_Bass";
+            this.Label_Title_Bass.Size = new System.Drawing.Size(86, 94);
+            this.Label_Title_Bass.TabIndex = 26;
+            this.Label_Title_Bass.Text = "BASS";
+            this.Label_Title_Bass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Thread1
             // 
@@ -190,10 +196,12 @@
             this.ToolStripMenuItem_Reload,
             this.ToolStripMenuItem_Help,
             this.ToolStripMenuItem_About,
-            this.ToolStripMenuItem_Exit});
+            this.ToolStripMenuItem_Exit,
+            this.ToolStripMenuItem_LastReload});
             this.MenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip1.Name = "MenuStrip1";
-            this.MenuStrip1.Size = new System.Drawing.Size(864, 24);
+            this.MenuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.MenuStrip1.Size = new System.Drawing.Size(1080, 29);
             this.MenuStrip1.TabIndex = 28;
             this.MenuStrip1.Text = "menuStrip1";
             this.MenuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MenuStrip1_MouseDown);
@@ -201,82 +209,74 @@
             // ToolStripMenuItem_Options
             // 
             this.ToolStripMenuItem_Options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripItem_OnlinePlay});
+            this.ToolStripItem_OnlinePlay,
+            this.ToolStripMenuItem_Harmonies});
             this.ToolStripMenuItem_Options.Name = "ToolStripMenuItem_Options";
-            this.ToolStripMenuItem_Options.Size = new System.Drawing.Size(58, 20);
+            this.ToolStripMenuItem_Options.Size = new System.Drawing.Size(71, 25);
             this.ToolStripMenuItem_Options.Text = "Options";
             // 
             // ToolStripItem_OnlinePlay
             // 
             this.ToolStripItem_OnlinePlay.CheckOnClick = true;
             this.ToolStripItem_OnlinePlay.Name = "ToolStripItem_OnlinePlay";
-            this.ToolStripItem_OnlinePlay.Size = new System.Drawing.Size(131, 22);
+            this.ToolStripItem_OnlinePlay.Size = new System.Drawing.Size(158, 26);
             this.ToolStripItem_OnlinePlay.Text = "Online Play";
             this.ToolStripItem_OnlinePlay.Click += new System.EventHandler(this.ToolStripItem_OnlinePlay_Click);
+            // 
+            // ToolStripMenuItem_Harmonies
+            // 
+            this.ToolStripMenuItem_Harmonies.CheckOnClick = true;
+            this.ToolStripMenuItem_Harmonies.Name = "ToolStripMenuItem_Harmonies";
+            this.ToolStripMenuItem_Harmonies.Size = new System.Drawing.Size(158, 26);
+            this.ToolStripMenuItem_Harmonies.Text = "Harmonies";
+            this.ToolStripMenuItem_Harmonies.Click += new System.EventHandler(this.ToolStripMenuItem_Harmonies_Click);
             // 
             // ToolStripMenuItem_Reload
             // 
             this.ToolStripMenuItem_Reload.Name = "ToolStripMenuItem_Reload";
-            this.ToolStripMenuItem_Reload.Size = new System.Drawing.Size(63, 20);
-            this.ToolStripMenuItem_Reload.Text = "Reload...";
+            this.ToolStripMenuItem_Reload.Size = new System.Drawing.Size(77, 25);
+            this.ToolStripMenuItem_Reload.Text = "Update...";
             this.ToolStripMenuItem_Reload.Click += new System.EventHandler(this.ToolStripMenuItem_Reload_Click);
             // 
             // ToolStripMenuItem_Help
             // 
             this.ToolStripMenuItem_Help.Name = "ToolStripMenuItem_Help";
-            this.ToolStripMenuItem_Help.Size = new System.Drawing.Size(51, 20);
+            this.ToolStripMenuItem_Help.Size = new System.Drawing.Size(60, 25);
             this.ToolStripMenuItem_Help.Text = "Help...";
             this.ToolStripMenuItem_Help.Click += new System.EventHandler(this.ToolStripMenuItem_Help_Click);
             // 
             // ToolStripMenuItem_About
             // 
             this.ToolStripMenuItem_About.Name = "ToolStripMenuItem_About";
-            this.ToolStripMenuItem_About.Size = new System.Drawing.Size(48, 20);
+            this.ToolStripMenuItem_About.Size = new System.Drawing.Size(56, 25);
             this.ToolStripMenuItem_About.Text = "Info...";
-            this.ToolStripMenuItem_About.Click += new System.EventHandler(this.ToolStripMenuItem_About_Click);
+            this.ToolStripMenuItem_About.Click += new System.EventHandler(this.ToolStripMenuItem_Info_Click);
             // 
             // ToolStripMenuItem_Exit
             // 
             this.ToolStripMenuItem_Exit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.ToolStripMenuItem_Exit.Name = "ToolStripMenuItem_Exit";
-            this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(39, 20);
+            this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(47, 25);
             this.ToolStripMenuItem_Exit.Text = "Exit";
             this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
             // 
-            // label7
+            // ToolStripMenuItem_LastReload
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(475, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(264, 60);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Rock Band 4";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label8.Location = new System.Drawing.Point(502, 84);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(211, 58);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "Path Vault";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolStripMenuItem_LastReload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ToolStripMenuItem_LastReload.Enabled = false;
+            this.ToolStripMenuItem_LastReload.Name = "ToolStripMenuItem_LastReload";
+            this.ToolStripMenuItem_LastReload.Size = new System.Drawing.Size(79, 25);
+            this.ToolStripMenuItem_LastReload.Text = "Updated:";
             // 
             // Label_Vocals1
             // 
             this.Label_Vocals1.BackColor = System.Drawing.Color.Gold;
             this.Label_Vocals1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Vocals1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Vocals1.Location = new System.Drawing.Point(68, 153);
+            this.Label_Vocals1.Location = new System.Drawing.Point(85, 191);
+            this.Label_Vocals1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Vocals1.Name = "Label_Vocals1";
-            this.Label_Vocals1.Size = new System.Drawing.Size(784, 35);
+            this.Label_Vocals1.Size = new System.Drawing.Size(980, 43);
             this.Label_Vocals1.TabIndex = 31;
             this.Label_Vocals1.Text = "label9";
             this.Label_Vocals1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -286,9 +286,10 @@
             this.Label_Vocals2.BackColor = System.Drawing.Color.Gold;
             this.Label_Vocals2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Vocals2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Vocals2.Location = new System.Drawing.Point(68, 194);
+            this.Label_Vocals2.Location = new System.Drawing.Point(85, 242);
+            this.Label_Vocals2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Vocals2.Name = "Label_Vocals2";
-            this.Label_Vocals2.Size = new System.Drawing.Size(784, 35);
+            this.Label_Vocals2.Size = new System.Drawing.Size(980, 43);
             this.Label_Vocals2.TabIndex = 32;
             this.Label_Vocals2.Text = "label10";
             this.Label_Vocals2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -298,9 +299,10 @@
             this.Label_Drums1.BackColor = System.Drawing.Color.Crimson;
             this.Label_Drums1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Drums1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Drums1.Location = new System.Drawing.Point(68, 235);
+            this.Label_Drums1.Location = new System.Drawing.Point(85, 294);
+            this.Label_Drums1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Drums1.Name = "Label_Drums1";
-            this.Label_Drums1.Size = new System.Drawing.Size(784, 35);
+            this.Label_Drums1.Size = new System.Drawing.Size(980, 43);
             this.Label_Drums1.TabIndex = 33;
             this.Label_Drums1.Text = "label11";
             this.Label_Drums1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -310,9 +312,10 @@
             this.Label_Guitar1.BackColor = System.Drawing.Color.RoyalBlue;
             this.Label_Guitar1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Guitar1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Guitar1.Location = new System.Drawing.Point(68, 317);
+            this.Label_Guitar1.Location = new System.Drawing.Point(85, 396);
+            this.Label_Guitar1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Guitar1.Name = "Label_Guitar1";
-            this.Label_Guitar1.Size = new System.Drawing.Size(784, 35);
+            this.Label_Guitar1.Size = new System.Drawing.Size(980, 43);
             this.Label_Guitar1.TabIndex = 34;
             this.Label_Guitar1.Text = "label12";
             this.Label_Guitar1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -322,9 +325,10 @@
             this.Label_Bass1.BackColor = System.Drawing.Color.LimeGreen;
             this.Label_Bass1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Bass1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Bass1.Location = new System.Drawing.Point(68, 399);
+            this.Label_Bass1.Location = new System.Drawing.Point(85, 499);
+            this.Label_Bass1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Bass1.Name = "Label_Bass1";
-            this.Label_Bass1.Size = new System.Drawing.Size(784, 35);
+            this.Label_Bass1.Size = new System.Drawing.Size(980, 43);
             this.Label_Bass1.TabIndex = 35;
             this.Label_Bass1.Text = "label13";
             this.Label_Bass1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -334,9 +338,10 @@
             this.Label_Drums2.BackColor = System.Drawing.Color.Crimson;
             this.Label_Drums2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Drums2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Drums2.Location = new System.Drawing.Point(68, 276);
+            this.Label_Drums2.Location = new System.Drawing.Point(85, 345);
+            this.Label_Drums2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Drums2.Name = "Label_Drums2";
-            this.Label_Drums2.Size = new System.Drawing.Size(784, 35);
+            this.Label_Drums2.Size = new System.Drawing.Size(980, 43);
             this.Label_Drums2.TabIndex = 36;
             this.Label_Drums2.Text = "label14";
             this.Label_Drums2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -346,9 +351,10 @@
             this.Label_Guitar2.BackColor = System.Drawing.Color.RoyalBlue;
             this.Label_Guitar2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Guitar2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Guitar2.Location = new System.Drawing.Point(68, 358);
+            this.Label_Guitar2.Location = new System.Drawing.Point(85, 448);
+            this.Label_Guitar2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Guitar2.Name = "Label_Guitar2";
-            this.Label_Guitar2.Size = new System.Drawing.Size(784, 35);
+            this.Label_Guitar2.Size = new System.Drawing.Size(980, 43);
             this.Label_Guitar2.TabIndex = 37;
             this.Label_Guitar2.Text = "label15";
             this.Label_Guitar2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -358,21 +364,47 @@
             this.Label_Bass2.BackColor = System.Drawing.Color.LimeGreen;
             this.Label_Bass2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label_Bass2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Bass2.Location = new System.Drawing.Point(68, 440);
+            this.Label_Bass2.Location = new System.Drawing.Point(85, 550);
+            this.Label_Bass2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label_Bass2.Name = "Label_Bass2";
-            this.Label_Bass2.Size = new System.Drawing.Size(784, 35);
+            this.Label_Bass2.Size = new System.Drawing.Size(980, 43);
             this.Label_Bass2.TabIndex = 38;
             this.Label_Bass2.Text = "label16";
             this.Label_Bass2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(523, 18);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(305, 133);
+            this.pictureBox1.TabIndex = 39;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.InitialImage = null;
+            this.pictureBox2.Location = new System.Drawing.Point(733, 116);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(332, 72);
+            this.pictureBox2.TabIndex = 40;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form_Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(864, 486);
+            this.ClientSize = new System.Drawing.Size(1080, 608);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Label_Bass2);
             this.Controls.Add(this.Label_Guitar2);
             this.Controls.Add(this.Label_Drums2);
@@ -381,30 +413,32 @@
             this.Controls.Add(this.Label_Drums1);
             this.Controls.Add(this.Label_Vocals2);
             this.Controls.Add(this.Label_Vocals1);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Label_Title_Bass);
+            this.Controls.Add(this.Label_Title_Guitar);
+            this.Controls.Add(this.Label_Title_Drums);
+            this.Controls.Add(this.Label_Title_Vocals);
             this.Controls.Add(this.Label_Message);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Label_Title_Select);
+            this.Controls.Add(this.Label_Title_Search);
             this.Controls.Add(this.ListBox_SongSelect);
             this.Controls.Add(this.TextBox_Input);
             this.Controls.Add(this.MenuStrip1);
+            this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rock Band 4 - Path Vault";
             this.Shown += new System.EventHandler(this.Form_Main_Shown);
             this.MenuStrip1.ResumeLayout(false);
             this.MenuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,20 +448,18 @@
 
         private System.Windows.Forms.TextBox TextBox_Input;
         private System.Windows.Forms.ListBox ListBox_SongSelect;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Label_Title_Search;
+        private System.Windows.Forms.Label Label_Title_Select;
         private System.Windows.Forms.Label Label_Message;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Label_Title_Vocals;
+        private System.Windows.Forms.Label Label_Title_Drums;
+        private System.Windows.Forms.Label Label_Title_Guitar;
+        private System.Windows.Forms.Label Label_Title_Bass;
         private System.ComponentModel.BackgroundWorker Thread1;
         private System.Windows.Forms.MenuStrip MenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Help;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_About;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Exit;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Reload;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Options;
         private System.Windows.Forms.ToolStripMenuItem ToolStripItem_OnlinePlay;
@@ -439,6 +471,10 @@
         private System.Windows.Forms.Label Label_Drums2;
         private System.Windows.Forms.Label Label_Guitar2;
         private System.Windows.Forms.Label Label_Bass2;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Harmonies;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_LastReload;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -47,6 +47,7 @@
             this.vocalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_GoldStar = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Harmonies = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_SpotlightShine = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Reload = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Info = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +65,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.PictureBox_Spotlight = new System.Windows.Forms.PictureBox();
+            this.Label_Spotlight = new System.Windows.Forms.Label();
             this.MenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -219,7 +221,8 @@
             this.ToolStripMenuItem_Options.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ToolStripMenuItem_Options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allInstrumentsToolStripMenuItem,
-            this.vocalsToolStripMenuItem});
+            this.vocalsToolStripMenuItem,
+            this.ToolStripMenuItem_SpotlightShine});
             this.ToolStripMenuItem_Options.Name = "ToolStripMenuItem_Options";
             this.ToolStripMenuItem_Options.Size = new System.Drawing.Size(71, 25);
             this.ToolStripMenuItem_Options.Text = "Options";
@@ -231,22 +234,22 @@
             this.ToolStripMenuItem_OnlinePlay,
             this.ToolStripMenuItem_FullBand});
             this.allInstrumentsToolStripMenuItem.Name = "allInstrumentsToolStripMenuItem";
-            this.allInstrumentsToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+            this.allInstrumentsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.allInstrumentsToolStripMenuItem.Text = "All Instruments";
             // 
             // ToolStripMenuItem_OnlinePlay
             // 
             this.ToolStripMenuItem_OnlinePlay.CheckOnClick = true;
             this.ToolStripMenuItem_OnlinePlay.Name = "ToolStripMenuItem_OnlinePlay";
-            this.ToolStripMenuItem_OnlinePlay.Size = new System.Drawing.Size(158, 26);
-            this.ToolStripMenuItem_OnlinePlay.Text = "Online Play";
+            this.ToolStripMenuItem_OnlinePlay.Size = new System.Drawing.Size(216, 26);
+            this.ToolStripMenuItem_OnlinePlay.Text = "Online/Fun";
             this.ToolStripMenuItem_OnlinePlay.Click += new System.EventHandler(this.ToolStripMenuItem_OnlinePlay_Click);
             // 
             // ToolStripMenuItem_FullBand
             // 
             this.ToolStripMenuItem_FullBand.CheckOnClick = true;
             this.ToolStripMenuItem_FullBand.Name = "ToolStripMenuItem_FullBand";
-            this.ToolStripMenuItem_FullBand.Size = new System.Drawing.Size(158, 26);
+            this.ToolStripMenuItem_FullBand.Size = new System.Drawing.Size(216, 26);
             this.ToolStripMenuItem_FullBand.Text = "Full Band";
             // 
             // vocalsToolStripMenuItem
@@ -256,23 +259,31 @@
             this.ToolStripMenuItem_GoldStar,
             this.ToolStripMenuItem_Harmonies});
             this.vocalsToolStripMenuItem.Name = "vocalsToolStripMenuItem";
-            this.vocalsToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+            this.vocalsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.vocalsToolStripMenuItem.Text = "Vocals";
             // 
             // ToolStripMenuItem_GoldStar
             // 
             this.ToolStripMenuItem_GoldStar.CheckOnClick = true;
             this.ToolStripMenuItem_GoldStar.Name = "ToolStripMenuItem_GoldStar";
-            this.ToolStripMenuItem_GoldStar.Size = new System.Drawing.Size(177, 26);
-            this.ToolStripMenuItem_GoldStar.Text = "Gold Star Only";
+            this.ToolStripMenuItem_GoldStar.Size = new System.Drawing.Size(216, 26);
+            this.ToolStripMenuItem_GoldStar.Text = "Gold Star Minimum";
             this.ToolStripMenuItem_GoldStar.Click += new System.EventHandler(this.ToolStripMenuItem_GoldStar_Click);
             // 
             // ToolStripMenuItem_Harmonies
             // 
             this.ToolStripMenuItem_Harmonies.CheckOnClick = true;
             this.ToolStripMenuItem_Harmonies.Name = "ToolStripMenuItem_Harmonies";
-            this.ToolStripMenuItem_Harmonies.Size = new System.Drawing.Size(177, 26);
+            this.ToolStripMenuItem_Harmonies.Size = new System.Drawing.Size(216, 26);
             this.ToolStripMenuItem_Harmonies.Text = "Harmonies";
+            // 
+            // ToolStripMenuItem_SpotlightShine
+            // 
+            this.ToolStripMenuItem_SpotlightShine.CheckOnClick = true;
+            this.ToolStripMenuItem_SpotlightShine.Name = "ToolStripMenuItem_SpotlightShine";
+            this.ToolStripMenuItem_SpotlightShine.Size = new System.Drawing.Size(216, 26);
+            this.ToolStripMenuItem_SpotlightShine.Text = "Spotlight Shine";
+            this.ToolStripMenuItem_SpotlightShine.Click += new System.EventHandler(this.ToolStripMenuItem_SpotlightShine_Click);
             // 
             // ToolStripMenuItem_Reload
             // 
@@ -452,12 +463,25 @@
             this.PictureBox_Spotlight.BackColor = System.Drawing.Color.Transparent;
             this.PictureBox_Spotlight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBox_Spotlight.BackgroundImage")));
             this.PictureBox_Spotlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PictureBox_Spotlight.Location = new System.Drawing.Point(466, 134);
+            this.PictureBox_Spotlight.Location = new System.Drawing.Point(479, 107);
             this.PictureBox_Spotlight.Name = "PictureBox_Spotlight";
             this.PictureBox_Spotlight.Size = new System.Drawing.Size(50, 50);
             this.PictureBox_Spotlight.TabIndex = 41;
             this.PictureBox_Spotlight.TabStop = false;
             this.PictureBox_Spotlight.Visible = false;
+            // 
+            // Label_Spotlight
+            // 
+            this.Label_Spotlight.AutoSize = true;
+            this.Label_Spotlight.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Spotlight.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Spotlight.ForeColor = System.Drawing.Color.Gold;
+            this.Label_Spotlight.Location = new System.Drawing.Point(466, 160);
+            this.Label_Spotlight.Name = "Label_Spotlight";
+            this.Label_Spotlight.Size = new System.Drawing.Size(79, 24);
+            this.Label_Spotlight.TabIndex = 42;
+            this.Label_Spotlight.Text = "SPOTLIGHT";
+            this.Label_Spotlight.Visible = false;
             // 
             // Form_Main
             // 
@@ -467,6 +491,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1080, 608);
+            this.Controls.Add(this.Label_Spotlight);
             this.Controls.Add(this.PictureBox_Spotlight);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Label_Bass2);
@@ -546,6 +571,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_GoldStar;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Harmonies;
         private System.Windows.Forms.PictureBox PictureBox_Spotlight;
+        private System.Windows.Forms.Label Label_Spotlight;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SpotlightShine;
     }
 }
 

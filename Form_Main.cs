@@ -11,26 +11,25 @@ using System.Net;
 using RB4PV;
 
 /*
-v0.7
+v0.8
 FEATURES
--Added spotlight text under star.
--Added spotlight shine option.
---Lists only spotlights in the select list.
--Added in another source for vocal paths.
---**Current vocal path count is 2574/2574 COMPLETE.
+--Reordered the options menu.
+----Online/Fun/XP will display any details about getting crimson stars on talky songs and if taps are required for gold stars.
+--Now displays if a vocal track is all/mostly talkies
+--Now displays if a song is epic length.
+----Used for vocals to display notes about whether or not taps are required for a GS.
+--Removed 'Update' button.
+----Instead just click 'Last Updated' to re-download song data.
 
 BUG FIXES
--Touched up the vocal data. Everything looks perfect now.
+--Full Band option now functions correctly.
+--Harmonies option now functions correctly.
+--Spotlight count is correct.
+--Correct vocal paths are now displayed.
 
 TECHNICAL
--Migrating main functions into seperate file (RB4PV.cs) to seperate code from GUI.
--Program now saves parsed data instead raw data. This should reduce load times by alot.
-
-TO DO
--Add Gold Star Only option
---For solo vocals it will attempt to simplify the path down to the easiest possible path.
-----Going to put this part on hold until all paths are one one sheet.
---It will also display if you need to do the tap sections or not; as well as display if the song is talkies only (therefore easily FC'ed on brutal mode).
+--Fixed unicode characters not displaying properly.
+--Improved the 'song update' code.
 
 REQUIREMENTS
 -Windows 7 or better.
@@ -99,12 +98,13 @@ namespace RockBand4PathVault
                 songs = Songs.SpotlightOnly;
 
             var i = ListBox_SongSelect.SelectedIndex;
-
+            
             if (i != -1)
             {
                 PictureBox_Spotlight.Visible = songs[i].IsSpotlight;
-                Label_Spotlight.Visible = songs[i].IsSpotlight;
-                    
+                PictureBox_Talky.Visible = songs[i].IsTalky;
+                PictureBox_Epic.Visible = songs[i].IsEpic;
+
                 Label_Drums1.Text = songs[i].DrumsPath;
                 Label_Drums2.Text = songs[i].DrumsNotes;
 
@@ -119,20 +119,39 @@ namespace RockBand4PathVault
                 }
                 else
                 {
-                    if (ToolStripMenuItem_Harmonies.Checked)
+                    if (ToolStripMenuItem_OnlinePlay.Checked)
                     {
-                        Label_Vocals1.Text = songs[i].HarmPath;
-                        Label_Vocals2.Text = songs[i].HarmNotes;
+                        Label_Guitar2.Text = "";
+                        Label_Bass2.Text = "";
+                        Label_Drums2.Text = "";
+
+                        if (ToolStripMenuItem_Harmonies.Checked)
+                        {
+                            Label_Vocals1.Text = songs[i].HarmPath;
+                            Label_Vocals2.Text = songs[i].HarmNotes;
+                        }
+                        else if (songs[i].IsTalky || songs[i].IsEpic)
+                        {
+                            Label_Vocals1.Text = songs[i].TalkyPath;
+                            Label_Vocals2.Text = songs[i].TalkyNotes;
+                        }
+                        else
+                        {
+                            Label_Vocals1.Text = songs[i].VocalPathReduced;
+                            Label_Vocals2.Text = "";
+                        }
                     }
                     else
                     {
-                        if (ToolStripMenuItem_GoldStar.Checked)
+                        Label_Guitar1.Text = songs[i].GuitarPath;
+                        Label_Guitar2.Text = songs[i].GuitarNotes;
+                        Label_Bass1.Text = songs[i].BassPath;
+                        Label_Bass2.Text = songs[i].BassNotes;
+
+                        if (ToolStripMenuItem_Harmonies.Checked)
                         {
-                            //???
-                            //reduce the path
-                            //delete all "S
-                            Label_Vocals1.Text = songs[i].VocalPath;
-                            Label_Vocals2.Text = songs[i].VocalNotes;
+                            Label_Vocals1.Text = songs[i].HarmPath;
+                            Label_Vocals2.Text = songs[i].HarmNotes;
                         }
                         else
                         {
@@ -140,11 +159,6 @@ namespace RockBand4PathVault
                             Label_Vocals2.Text = songs[i].VocalNotes;
                         }
                     }
-
-                    Label_Guitar1.Text = songs[i].GuitarPath;
-                    Label_Guitar2.Text = songs[i].GuitarNotes;
-                    Label_Bass1.Text = songs[i].BassPath;
-                    Label_Bass2.Text = songs[i].BassNotes;
                 }
             }
         }
@@ -153,6 +167,10 @@ namespace RockBand4PathVault
         public Form_Main()
         {
             InitializeComponent();
+
+            new ToolTip().SetToolTip(PictureBox_Spotlight, "Spotlight");
+            new ToolTip().SetToolTip(PictureBox_Talky, "Vocals: Talky");
+            new ToolTip().SetToolTip(PictureBox_Epic, "Epic Length");
         }
 
         private void Form_Main_Shown(object sender, EventArgs e)
@@ -207,6 +225,8 @@ namespace RockBand4PathVault
                 try
                 {
                     Songs = Funct.GetSongData();
+                    Properties.Settings.Default.Songs = Funct.Serialize(Songs);
+                    Properties.Settings.Default.Save();
                 }
                 catch(WebException webEx)
                 {
@@ -219,9 +239,6 @@ namespace RockBand4PathVault
                         );
                 }
             }
-
-            Properties.Settings.Default.Songs = Funct.Serialize(Songs);
-            Properties.Settings.Default.Save();
         }
 
         private void Thread1_RunWorkerCompleted(Object sender, RunWorkerCompletedEventArgs e)
@@ -233,7 +250,7 @@ namespace RockBand4PathVault
             for (Int32 i = 0; i < MenuStrip1.Items.Count; i++)
                 MenuStrip1.Items[i].Enabled = true;
 
-            ToolStripMenuItem_LastReload.Text = "Updated: " + 
+            ToolStripMenuItem_Reload.Text = "Last Updated: " + 
                 Songs.TimeOfDownload.ToString("MM/dd/yy") + 
                 " - " +
                 Songs.TimeOfDownload.ToString("t");
@@ -268,7 +285,7 @@ namespace RockBand4PathVault
                 "\nTotal Spotlights: " + Songs.SpotlightTotal.ToString("D") +
                 "\n\nUpdated for new DLC: " + Songs.UpdateWeek +
                 "\n\nNote: Database is only updated every 5 minutes and actual paths are updated/added a lot more infrequently.",
-                "Version 0.7",
+                "Version 0.8",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Question
                 );
@@ -298,9 +315,11 @@ namespace RockBand4PathVault
             }
         }
 
+        //DEFUNCT
         private void ToolStripMenuItem_OnlinePlay_Click(Object sender, EventArgs e)
         {
-            if(ToolStripMenuItem_OnlinePlay.Checked)
+            DisplayPaths();
+            /*if(ToolStripMenuItem_OnlinePlay.Checked)
             {
                 Label_Vocals2.Visible = false;
                 Label_Drums2.Visible = false;
@@ -323,7 +342,7 @@ namespace RockBand4PathVault
                 Label_Drums1.Height = 35;
                 Label_Guitar1.Height = 35;
                 Label_Bass1.Height = 35;
-            }
+            }*/
         }
 
         private void ToolStripMenuItem_Harmonies_Click(Object sender, EventArgs e)

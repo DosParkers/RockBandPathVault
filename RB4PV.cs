@@ -83,7 +83,7 @@ namespace RB4PV
         {
             get
             {
-                return SpotlightTotal - Songs.Where(song => song.IsSpotlight).GroupBy(song => song.Title).Where(song => song.Count() > 1).Count(); ;
+                return Songs.Count(song => song.IsSpotlight);
             }
         }
 
@@ -91,7 +91,7 @@ namespace RB4PV
         {
             get
             {
-                return Songs.Where(song => song.IsSpotlight).Count();
+                return Songs.Sum(song => song.SpotlightCount);
             }
         }
 
@@ -103,6 +103,7 @@ namespace RB4PV
 
             public String VocalPath { get; set; }
             public String VocalNotes { get; set; }
+            public String VocalPathReduced { get; set; }
 
             public String DrumsPath { get; set; }
             public String DrumsNotes { get; set; }
@@ -116,7 +117,14 @@ namespace RB4PV
             public String HarmPath { get; set; }
             public String HarmNotes { get; set; }
 
-            public Boolean IsSpotlight { get; set; }
+            public Boolean IsSpotlight { get { return SpotlightCount > 0; } }
+            public Int32 SpotlightCount { get; set; }
+
+            public Boolean IsTalky { get; set; }
+            public String TalkyPath { get; set; }
+            public String TalkyNotes { get; set; }
+
+            public Boolean IsEpic { get; set; }
             
             public Song()
             {
@@ -124,6 +132,7 @@ namespace RB4PV
                 Artist = "";
                 VocalPath = "";
                 VocalNotes = "";
+                VocalPathReduced = "";
                 DrumsPath = "";
                 DrumsNotes = "";
                 GuitarPath = "";
@@ -132,32 +141,38 @@ namespace RB4PV
                 BassNotes = "";
                 HarmPath = "";
                 HarmNotes = "";
-                IsSpotlight = false;
+                TalkyPath = "";
+                TalkyNotes = "";
+                SpotlightCount = 0;
+                IsEpic = false;
+                IsTalky = false;
             }
         }
     }
 
     public static class Funct
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static SongData GetSongData()
         {
-            return ParseFiles(DownloadFiles(null));
+            return ParseFiles(DownloadFiles());
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="savedFiles">Pass in a null object to force the download. Otherwise, pass in previous downloaded data.</param>
         /// <exception cref="WebException"></exception>
         /// <returns></returns>
-        public static List<String[]> DownloadFiles(List<String[]> savedFiles)
+        private static List<String[]> DownloadFiles()
         {
-            #region links List<string>
             List<String> links = new List<String>
             {
                 //0 - Vocals
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=358267987&single=true&output=tsv",
-                //1 - Vocals Paths(Old)
+                //1 - Vocals Paths(ALL)
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=1849782495&single=true&output=tsv",
                 //2 - Drums
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=898076730&single=true&output=tsv",
@@ -167,7 +182,7 @@ namespace RB4PV
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=1635523912&single=true&output=tsv",
                 //5 - About
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=157720447&single=true&output=tsv",
-                //6 - Vocals Paths (ALL)
+                //6 - Vocals Paths (OLD)
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=0&single=true&output=tsv",
                 //7 - Harm
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=686163764&single=true&output=tsv",
@@ -175,25 +190,26 @@ namespace RB4PV
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=1180744761&single=true&output=tsv",
                 //9 - VocalsSH
                 @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=1178758294&single=true&output=tsv",
+                //10 - Vocal/Talky/Brutal
+                @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=417970423&single=true&output=tsv",
+                //11 - Vocal/Epic/Taps
+                @"https://docs.google.com/spreadsheets/d/e/2PACX-1vQn0oFUMAvzL3WOk83sn6YiG_OO-iEx3z_hcux6uJaDNLvte8R_McTgSDoulmyIwq6AF2kQApgTDJ76/pub?gid=1894013534&single=true&output=tsv",
             };
-            #endregion
 
-            if (savedFiles == null || savedFiles.Any(file => file == null) || savedFiles.Count != 10)
+            var files = new List<String[]>();
+
+            using (var client = new WebClient() { Encoding = Encoding.UTF8 })
             {
-                savedFiles = new List<String[]>();
-
-                using (var client = new WebClient())
-                {
-                    links.ForEach(link =>
-                        savedFiles.Add(client.DownloadString(link).Split('\n'))
-                    );
-
-                    for (Int32 i = 0; i < savedFiles.Last().Count(); i++)
-                        savedFiles.Last()[i] = savedFiles.Last()[i].Trim();
-                }
+                links.ForEach(link =>
+                    files.Add(client.DownloadString(link)
+                        .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Where(line => !String.IsNullOrWhiteSpace(line))
+                        .Select(line => line.Trim())
+                        .ToArray())
+                );
             }
 
-            return savedFiles;
+            return files;
         }
 
         /// <summary>
@@ -201,71 +217,164 @@ namespace RB4PV
         /// </summary>
         /// <param name="files"></param>
         /// <returns></returns>
-        public static SongData ParseFiles(List<String[]> files)
+        private static SongData ParseFiles(List<String[]> files)
         {
-            var songs = new SongData();
-
             var spotlights = new SongData();
-            #region Get spotlight data from files.
             for (var i = 1; i < files[8].Length; i++)
             {
                 var song = files[8][i].Split('\t');
 
-                if (song.Count() > 1)
-                {
-                    var title = song[0];
-                    var artist = song[1];
+                var title = song[0];
+                var artist = song[1];
 
-                    if (title != "-" || title != "")
+                if (title != "-" && title != "")
+                {
+                    spotlights.Songs.Add(new SongData.Song
                     {
-                        spotlights.Songs.Add(new SongData.Song
-                        {
-                            Title = title,
-                            Artist = artist,
-                        });
-                    }
+                        Title = title,
+                        Artist = artist,
+                    });
                 }
             }
-            #endregion
-            
-            #region Get song list data from files.
-            for (var x = 2; x < files[0].Length; x++)
+
+            var talkyOnly = new SongData();
+            for (var i = 1; i < files[10].Length; i++)
             {
-                var title = files[0][x].Split('\t')[0];
-                var artist = files[0][x].Split('\t')[1];
+                var song = files[10][i].Split('\t');
+
+                var title = song[0];
+                var artist = song[1];
+                var path = song[2];
+                var notes = song[3];
+
+                if (title != "-" && title != "")
+                {
+                    talkyOnly.Songs.Add(new SongData.Song
+                    {
+                        Title = title,
+                        Artist = artist,
+                        TalkyPath = path,
+                        TalkyNotes = notes,
+                    });
+                }
+            }
+
+            var epicOnly = new SongData();
+            for (var i = 1; i < files[11].Length; i++)
+            {
+                var song = files[11][i].Split('\t');
+
+                var title = song[0];
+                var artist = song[1];
+                var path = (song.Count() > 2) ? song[2] : "";
+                var notes = (song.Count() > 3) ? song[3] : "";
+
+                if (title != "-" && title != "")
+                {
+                    epicOnly.Songs.Add(new SongData.Song
+                    {
+                        Title = title,
+                        Artist = artist,
+                        TalkyPath = path,
+                        TalkyNotes = notes,
+                    });
+                }
+            }
+
+            var songs = new SongData();
+            for (var i = 2; i < files[0].Length; i++)
+            {
+                var vocalLine = files[0][i].Split('\t').ToList();
+                var drumsLine = files[2][i].Split('\t').ToList();
+                var guitarLine = files[3][i].Split('\t').ToList();
+                var bassLine = files[4][i].Split('\t').ToList();
+                var harmLine = files[7][i].Split('\t').ToList();
+                
+                var title = vocalLine[0];
+                var artist = vocalLine[1];
 
                 songs.Songs.Add(new SongData.Song
                 {
                     Title = title,
                     Artist = artist,
-                    VocalPath = files[0][x].Split('\t')[2],
-                    VocalNotes = files[0][x].Split('\t')[3],
-                    DrumsPath = files[2][x].Split('\t')[2],
-                    DrumsNotes = files[2][x].Split('\t')[3],
-                    GuitarPath = files[3][x].Split('\t')[2],
-                    GuitarNotes = files[3][x].Split('\t')[3],
-                    BassPath = files[4][x].Split('\t')[2],
-                    BassNotes = files[4][x].Split('\t')[3],
-                    HarmPath = files[7][x].Split('\t')[2],
-                    HarmNotes = files[7][x].Split('\t')[3],
+                    VocalPath = (vocalLine.Count > 2) ? vocalLine[2] : "",
+                    VocalNotes = (vocalLine.Count > 3) ? vocalLine[3] : "",
+                    DrumsPath = (drumsLine.Count > 2) ? drumsLine[2] : "",
+                    DrumsNotes = (drumsLine.Count > 3) ? drumsLine[3] : "",
+                    GuitarPath = (guitarLine.Count > 2) ? guitarLine[2] : "",
+                    GuitarNotes = (guitarLine.Count > 3) ? guitarLine[3] : "",
+                    BassPath = (bassLine.Count > 2) ? bassLine[2] : "",
+                    BassNotes = (bassLine.Count > 3) ? bassLine[3] : "",
+                    HarmPath = (harmLine.Count > 2) ? harmLine[2] : "",
+                    HarmNotes = (harmLine.Count > 3) ? harmLine[3] : "",
                 });
-
-                if (spotlights.Songs.Exists(song =>
-                     song.Title.ToLower() == title.ToLower() &&
-                     song.Artist.ToLower() == artist.ToLower())
-                    )
-                {
-                    songs.Songs.Last().IsSpotlight = true;
-                }
             }
-            #endregion
+
+            var spotlightError = new SongData();
+            spotlights.Songs.ForEach(x =>
+            {
+                var index = songs.Songs.FindIndex(song => song.Title.ToLower() == x.Title.ToLower() && song.Artist.ToLower() == x.Artist.ToLower());
+
+                if (index != -1)
+                {
+                    songs.Songs[index].SpotlightCount++;
+                }
+                else
+                {
+                    spotlightError.Songs.Add(new SongData.Song() { Title = x.Title, Artist = x.Artist });
+                }
+            });
+
+            var talkyError = new SongData();
+            talkyOnly.Songs.ForEach(x =>
+            {
+                var index = songs.Songs.FindIndex(song => song.Title.ToLower() == x.Title.ToLower() && song.Artist.ToLower() == x.Artist.ToLower());
+
+                if (index != -1)
+                {
+                    songs.Songs[index].IsTalky = true;
+                    songs.Songs[index].TalkyPath = x.TalkyPath;
+                    songs.Songs[index].TalkyNotes = x.TalkyNotes;
+                }
+                else
+                {
+                    talkyError.Songs.Add(new SongData.Song() { Title = x.Title, Artist = x.Artist });
+                }
+            });
+
+            var epicError = new SongData();
+            epicOnly.Songs.ForEach(x =>
+            {
+                var index = songs.Songs.FindIndex(song => song.Title.ToLower() == x.Title.ToLower() && song.Artist.ToLower() == x.Artist.ToLower());
+
+                if (index != -1)
+                {
+                    songs.Songs[index].IsEpic = true;
+
+                    songs.Songs[index].TalkyPath += x.TalkyPath;
+
+                    if (songs.Songs[index].TalkyNotes != "")
+                        songs.Songs[index].TalkyNotes += " ";
+                    songs.Songs[index].TalkyNotes += x.TalkyNotes;
+                }
+                else
+                {
+                    epicError.Songs.Add(new SongData.Song() { Title = x.Title, Artist = x.Artist });
+                }
+            });
+
+            if (spotlightError.Songs.Count > 0)
+                System.Windows.Forms.MessageBox.Show(spotlightError.Songs.ToString(), "Spotlight Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+            if (talkyError.Songs.Count > 0)
+                System.Windows.Forms.MessageBox.Show(talkyError.Songs.ToString(), "Talky Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+            if (epicError.Songs.Count > 0)
+                System.Windows.Forms.MessageBox.Show(epicError.Songs.ToString(), "Epic Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
 
             var songsALL = new SongData();
             var songsOLD = new SongData();
             var songsScH = new SongData();
-
-            #region Get old vox data.
-            String[] lines2 = files[1].Skip(2).Where(line => line != "").ToArray();
+            
+            String[] lines2 = files[1].Skip(2).ToArray();
             foreach (string line in lines2)
             {
                 string[] lineFormat = line.Split('\t');
@@ -278,38 +387,37 @@ namespace RB4PV
                 });
             }
 
-            String[] lines3 = files[6].Skip(2).Where(line => line != "").ToArray();
+            String[] lines3 = files[6].Skip(2).ToArray();
             foreach (var line in lines3)
             {
-                var lineFormat = line.Split('\t');
+                var lineFormat = line.Split('\t').ToList();
                 songsOLD.Songs.Add(new SongData.Song
                 {
                     Title = lineFormat[0],
                     Artist = lineFormat[1],
-                    VocalPath = lineFormat[2],
-                    VocalNotes = lineFormat[3],
+                    VocalPath = (lineFormat.Count > 2) ? lineFormat[2] : "",
+                    VocalNotes = (lineFormat.Count > 3) ? lineFormat[3] : "",
                 });
             }
 
-            String[] linesSH = files[9].Where(line => line != "").ToArray();
+            String[] linesSH = files[9].ToArray();
             foreach (var line in linesSH)
             {
                 var lineFormat = line.Split(':');
                 songsScH.Songs.Add(new SongData.Song
                 {
-                    Title = lineFormat[0],
+                    Title = lineFormat[0].Trim(),
                     Artist = "",
-                    VocalPath = lineFormat[1],
+                    VocalPath = lineFormat[1].Trim(),
                 });
             }
-            #endregion
 
             //Remove empty paths.
             songsALL.Songs = songsALL.Songs.Where(song => song.VocalPath != "").ToList();
             songsOLD.Songs = songsOLD.Songs.Where(song => song.VocalPath != "").ToList();
             songsScH.Songs = songsScH.Songs.Where(song => song.VocalPath != "").ToList();
-
-            #region Add old vox data to song list.
+            
+            //Add all vocal paths together.
             for (Int32 i = 0; i < songs.Songs.Count; i++)
             {
                 if (songs.Songs[i].VocalPath == "")
@@ -318,28 +426,71 @@ namespace RB4PV
                     {
                         Songs = new List<SongData.Song>
                         {
-                            songsOLD.Songs.Find(songOld => songOld.Title.ToLower() == songs.Songs[i].Title.ToLower()),
+                            songsALL.Songs.Find(songOld => songOld.Title.ToLower() == songs.Songs[i].Title.ToLower()),
                             songsScH.Songs.Find(songOld => songOld.Title.ToLower() == songs.Songs[i].Title.ToLower() && songs.Songs.Where(song2 => song2.Title.ToLower() == songOld.Title.ToLower()).Count() < 2),
-                            songsALL.Songs.Find(songOld => songOld.Title.ToLower() == songs.Songs[i].Title.ToLower())
+                            songsOLD.Songs.Find(songOld => songOld.Title.ToLower() == songs.Songs[i].Title.ToLower()),
                         }
                     };
 
-                    songsTemp.Songs = songsTemp.Songs.Where(songTemp => songTemp != null && songTemp.VocalPath != "").ToList();
-
-                    songsTemp.Songs.ForEach(songTemp =>
-                    {
-                        songs.Songs[i].VocalPath = songTemp.VocalPath;
-                        songs.Songs[i].VocalNotes = songTemp.VocalNotes;
-                    });
+                    songsTemp.Songs
+                        .Where(songTemp => songTemp != null && songTemp.VocalPath != "")
+                        .ToList()
+                        .ForEach(songTemp =>
+                        {
+                            songs.Songs[i].VocalPath = songTemp.VocalPath;
+                            songs.Songs[i].VocalNotes = songTemp.VocalNotes;
+                        }
+                    );
 
                 }
             }
-            #endregion
+
+            for(Int32 i = 0; i < songs.Songs.Count; i++)
+            {
+                songs.Songs[i].VocalPathReduced = ReduceVocalPath(songs.Songs[i].VocalPath);
+            }
 
             //Last Time DLC was added.
             songs.UpdateWeek = files[5][1].Split('\t')[2];
 
+            songs.Songs = songs.Songs.OrderBy(song => song.Title).ToList();
+
             return songs; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private static String ReduceVocalPath(String path)
+        {
+            if (String.IsNullOrEmpty(path))
+                return "";
+
+            if (!path.Contains("/"))
+                return path;
+
+            //Not implemented.
+            return path;
+
+            var newPath = "";
+            var pathSplit = path
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+            pathSplit.ForEach(part =>
+                {
+                    var part1 = part.ToList().Find(parts => Char.IsDigit(parts));
+                    var part2 = part.Split('/').Count() > 1 ? part.Split('/')[1] : " ";
+                    newPath += part1 + "/";
+                    if (part2.Count() > 0 && part2[0] == 'B')
+                        newPath += part2[0];
+                    newPath += ", ";
+                }
+            );
+            
+            return newPath;
         }
 
         /// <summary>
